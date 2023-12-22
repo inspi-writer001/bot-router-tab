@@ -33,6 +33,7 @@
     "test:coverage:report": "forge coverage --report lcov && genhtml lcov.info --branch-coverage --output-dir coverage"
   },
   "dependencies": {
+    "@openzeppelin/contracts": "^5.0.1",
     "solhint": "^3.6.2"
   }
 }

@@ -3,8 +3,9 @@ pragma solidity >=0.8.23;
 
 import "./interfaces/ILBRouter.sol";
 import "./interfaces/IWNATIVE.sol";
+import "@openzeppelin/contracts/access/Ownable2Step.sol";
 
-contract BotRouter {
+contract BotRouter is Ownable2Step {
     ILBRouter public router;
     IWNATIVE public native;
 
@@ -12,8 +13,10 @@ contract BotRouter {
 
     uint128 public sellFee = 200; // 2% in basis points (parts per 10,000)
 
+    event FundsWithdrawn(uint256 amount);
+
     // 0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7
-    constructor(address _router, address _native) {
+    constructor(address _router, address _native, address initialOwner) Ownable(initialOwner) payable {
         router = ILBRouter(_router);
         native = IWNATIVE(_native);
     }
@@ -46,5 +49,14 @@ contract BotRouter {
         uint256 valueAfterFees = (value * sellFee) / 10_000;
 
         payable(msg.sender).transfer(valueAfterFees);
+    }
+
+    function withdrawFees() external onlyOwner {
+        // Withdraw the contract balance to the owner
+        uint256 contractBalance = address(this).balance;
+        require(contractBalance > 0, "No funds available for withdrawal.");
+        payable(owner()).transfer(contractBalance);
+
+        emit FundsWithdrawn(contractBalance);
     }
 }

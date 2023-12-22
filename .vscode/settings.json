@@ -9,6 +9,7 @@
   "solidity.formatter": "forge",
   "wake.compiler.solc.remappings": [
     "@prb/test/=node_modules/@prb/test/",
-    "forge-std/=node_modules/forge-std/"
+    "forge-std/=node_modules/forge-std/",
+    "@openzeppelin/=node_modules/@openzeppelin/"
   ]
 }
