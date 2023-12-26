@@ -1,46 +1,39 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.23;
 
-import "./interfaces/ILBRouter.sol";
+import "./interfaces/IJoeRouter02.sol";
 import "./interfaces/IWNATIVE.sol";
 import "@openzeppelin/contracts/access/Ownable2Step.sol";
 
 contract BotRouter is Ownable2Step {
-    ILBRouter public router;
-    IWNATIVE public native;
-
-    address public nativeAvax = address(native);
-
     uint128 public sellFee = 200; // 2% in basis points (parts per 10,000)
 
     event FundsWithdrawn(uint256 amount);
 
-    // 0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7
-    constructor(address _router, address _native, address initialOwner) Ownable(initialOwner) payable {
-        router = ILBRouter(_router);
-        native = IWNATIVE(_native);
+    IJoeRouter02 public router;
+
+    constructor(address initialOwner) payable Ownable(initialOwner) {
+        router = IJoeRouter02(0x60aE616a2155Ee3d9A68541Ba4544862310933d4);
     }
 
     function buy(address _tokenOut, uint256 amountOutMin, uint256 deadline) external payable {
         // Define the path of the swap
-        ILBRouter.Path memory path;
-        path.tokenPath = new IERC20[](2);
-        path.tokenPath[0] = IERC20(nativeAvax);
-        path.tokenPath[1] = IERC20(_tokenOut);
+        address[] memory path = new address[](2);
+        path[0] = router.WAVAX();
+        path[1] = _tokenOut;
 
         // perform the swap
-        router.swapExactNATIVEForTokens{ value: msg.value }(amountOutMin, path, msg.sender, deadline);
+        router.swapExactAVAXForTokens{ value: msg.value }(amountOutMin, path, msg.sender, deadline);
     }
 
     function sell(address _tokenIn, uint256 amountOutMin, uint256 amountInMax, uint256 deadline) external {
         // Define the path of the swap
-        ILBRouter.Path memory path;
-        path.tokenPath = new IERC20[](2);
-        path.tokenPath[0] = IERC20(_tokenIn);
-        path.tokenPath[1] = IERC20(nativeAvax);
+        address[] memory path = new address[](2);
+        path[0] = router.WAVAX();
+        path[1] = _tokenIn;
 
         uint256 balanceBefore = address(this).balance;
-        router.swapTokensForExactNATIVE(amountOutMin, amountInMax, path, payable(address(this)), deadline);
+        router.swapExactTokensForAVAX(amountOutMin, amountInMax, path, payable(address(this)), deadline);
 
         uint256 balanceAfter = address(this).balance;
 
