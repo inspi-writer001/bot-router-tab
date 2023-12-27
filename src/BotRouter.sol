@@ -24,6 +24,8 @@ contract BotRouter is Ownable2Step {
         path[0] = router.WAVAX();
         path[1] = _tokenOut;
 
+        deadline += block.timestamp;
+
         // perform the swap
         router.swapExactAVAXForTokens{ value: msg.value }(amountOutMin, path, msg.sender, deadline);
     }
