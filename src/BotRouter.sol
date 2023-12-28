@@ -33,8 +33,8 @@ contract BotRouter is Ownable2Step {
     function sell(address _tokenIn, uint256 amountOutMin, uint256 amountInMax, uint256 deadline) external {
         // Define the path of the swap
         address[] memory path = new address[](2);
-        path[0] = router.WAVAX();
-        path[1] = _tokenIn;
+        path[0] = _tokenIn;
+        path[1] = router.WAVAX();
 
         deadline += block.timestamp;
         
