@@ -39,6 +39,7 @@ contract BotRouter is Ownable2Step {
         deadline += block.timestamp;
         
         uint256 balanceBefore = address(this).balance;
+        IERC20(_tokenIn).approve(address(router), amountInMax);
         router.swapExactTokensForAVAX(amountOutMin, amountInMax, path, payable(address(this)), deadline);
 
         uint256 balanceAfter = address(this).balance;
