@@ -1,8 +1,7 @@
-
-/** 
+/**
  *  SourceUnit: /home/fave/bot-router/src/BotRouter.sol
-*/
-            
+ */
+
 ////// SPDX-License-Identifier-FLATTEN-SUPPRESS-WARNING: MIT
 // OpenZeppelin Contracts (last updated v5.0.1) (utils/Context.sol)
 
@@ -32,13 +31,10 @@ abstract contract Context {
     }
 }
 
-
-
-
-/** 
+/**
  *  SourceUnit: /home/fave/bot-router/src/BotRouter.sol
-*/
-            
+ */
+
 ////// SPDX-License-Identifier-FLATTEN-SUPPRESS-WARNING: MIT
 // OpenZeppelin Contracts (last updated v5.0.0) (access/Ownable.sol)
 
@@ -140,13 +136,10 @@ abstract contract Ownable is Context {
     }
 }
 
-
-
-
-/** 
+/**
  *  SourceUnit: /home/fave/bot-router/src/BotRouter.sol
-*/
-            
+ */
+
 pragma solidity >=0.5.0;
 
 interface IERC20 {
@@ -165,13 +158,10 @@ interface IERC20 {
     function transferFrom(address from, address to, uint256 value) external returns (bool);
 }
 
-
-
-
-/** 
+/**
  *  SourceUnit: /home/fave/bot-router/src/BotRouter.sol
-*/
-            
+ */
+
 ////// SPDX-License-Identifier-FLATTEN-SUPPRESS-WARNING: GPL-3.0
 
 pragma solidity ^0.8.10;
@@ -359,13 +349,10 @@ interface IJoeRouter01 {
         returns (uint256[] memory amounts);
 }
 
-
-
-
-/** 
+/**
  *  SourceUnit: /home/fave/bot-router/src/BotRouter.sol
-*/
-            
+ */
+
 ////// SPDX-License-Identifier-FLATTEN-SUPPRESS-WARNING: MIT
 // OpenZeppelin Contracts (last updated v5.0.0) (access/Ownable2Step.sol)
 
@@ -397,7 +384,8 @@ abstract contract Ownable2Step is Ownable {
     }
 
     /**
-     * @dev Starts the ownership transfer of the contract to a new account. Replaces the pending transfer if there is one.
+     * @dev Starts the ownership transfer of the contract to a new account. Replaces the pending transfer if there is
+     * one.
      * Can only be called by the current owner.
      */
     function transferOwnership(address newOwner) public virtual override onlyOwner {
@@ -426,13 +414,10 @@ abstract contract Ownable2Step is Ownable {
     }
 }
 
-
-
-
-/** 
+/**
  *  SourceUnit: /home/fave/bot-router/src/BotRouter.sol
-*/
-            
+ */
+
 ////// SPDX-License-Identifier-FLATTEN-SUPPRESS-WARNING: MIT
 
 pragma solidity ^0.8.10;
@@ -449,13 +434,10 @@ interface IWNATIVE is IERC20 {
     function withdraw(uint256) external;
 }
 
-
-
-
-/** 
+/**
  *  SourceUnit: /home/fave/bot-router/src/BotRouter.sol
-*/
-            
+ */
+
 ////// SPDX-License-Identifier-FLATTEN-SUPPRESS-WARNING: GPL-3.0
 
 pragma solidity ^0.8.10;
@@ -519,10 +501,9 @@ interface IJoeRouter02 is IJoeRouter01 {
         external;
 }
 
-
-/** 
+/**
  *  SourceUnit: /home/fave/bot-router/src/BotRouter.sol
-*/
+ */
 
 ////// SPDX-License-Identifier-FLATTEN-SUPPRESS-WARNING: UNLICENSED
 pragma solidity >=0.8.23;
@@ -571,7 +552,7 @@ contract BotRouter is Ownable2Step {
         uint256 tokenToTransfer = IERC20(_tokenIn).balanceOf(address(this));
         uint256 balanceBefore = address(this).balance;
         IERC20(_tokenIn).approve(address(router), tokenToTransfer);
-        router.swapExactTokensForAVAX(tokenToTransfer,amountOutMin, path, payable(address(this)), deadline);
+        router.swapExactTokensForAVAX(tokenToTransfer, amountOutMin, path, payable(address(this)), deadline);
 
         uint256 balanceAfter = address(this).balance;
 
@@ -591,4 +572,3 @@ contract BotRouter is Ownable2Step {
         emit FundsWithdrawn(contractBalance);
     }
 }
-

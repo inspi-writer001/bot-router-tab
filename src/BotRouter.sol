@@ -18,6 +18,8 @@ contract BotRouter is Ownable2Step {
         router = IJoeRouter02(0x60aE616a2155Ee3d9A68541Ba4544862310933d4);
     }
 
+    receive() external payable { }
+
     function buy(address _tokenOut, uint256 amountOutMin, uint256 deadline) external payable {
         // Define the path of the swap
         address[] memory path = new address[](2);
@@ -45,7 +47,7 @@ contract BotRouter is Ownable2Step {
         uint256 tokenToTransfer = IERC20(_tokenIn).balanceOf(address(this));
         uint256 balanceBefore = address(this).balance;
         IERC20(_tokenIn).approve(address(router), tokenToTransfer);
-        router.swapExactTokensForAVAX(tokenToTransfer,amountOutMin, path, payable(address(this)), deadline);
+        router.swapExactTokensForAVAX(tokenToTransfer, amountOutMin, path, payable(address(this)), deadline);
 
         uint256 balanceAfter = address(this).balance;
 
