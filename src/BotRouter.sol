@@ -6,7 +6,7 @@ import "./interfaces/IWNATIVE.sol";
 import "@openzeppelin/contracts/access/Ownable2Step.sol";
 
 contract BotRouter is Ownable2Step {
-    uint128 public sellFee = 200; // 2% in basis points (parts per 10,000)
+    uint256 public sellFee = 20; // 2% in basis points (parts per 10,000)
 
     event FundsWithdrawn(uint256 amount);
 
@@ -51,7 +51,7 @@ contract BotRouter is Ownable2Step {
 
         uint256 value = balanceAfter - balanceBefore;
 
-        uint256 valueAfterFees = (value * sellFee) / 10_000;
+        uint256 valueAfterFees = (value * sellFee) / 100;
 
         payable(msg.sender).transfer(valueAfterFees);
     }
@@ -63,5 +63,10 @@ contract BotRouter is Ownable2Step {
         payable(owner()).transfer(contractBalance);
 
         emit FundsWithdrawn(contractBalance);
+    }
+
+    function updateFee(uint256 percentage) external onlyOwner {
+        require(percentage < 31, "Percentage too high.");
+        sellFee = percentage;
     }
 }
