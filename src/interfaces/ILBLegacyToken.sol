@@ -22,7 +22,10 @@ interface ILBLegacyToken is IERC165 {
 
     function balanceOf(address account, uint256 id) external view returns (uint256);
 
-    function balanceOfBatch(address[] calldata accounts, uint256[] calldata ids)
+    function balanceOfBatch(
+        address[] calldata accounts,
+        uint256[] calldata ids
+    )
         external
         view
         returns (uint256[] memory batchBalances);
@@ -35,6 +38,11 @@ interface ILBLegacyToken is IERC165 {
 
     function safeTransferFrom(address from, address to, uint256 id, uint256 amount) external;
 
-    function safeBatchTransferFrom(address from, address to, uint256[] calldata id, uint256[] calldata amount)
+    function safeBatchTransferFrom(
+        address from,
+        address to,
+        uint256[] calldata id,
+        uint256[] calldata amount
+    )
         external;
 }

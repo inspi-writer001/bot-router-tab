@@ -2,9 +2,9 @@
 
 pragma solidity ^0.8.10;
 
-import {IERC20} from "./IERC20.sol";
+import { IERC20 } from "./IERC20.sol";
 
-import {ILBLegacyToken} from "./ILBLegacyToken.sol";
+import { ILBLegacyToken } from "./ILBLegacyToken.sol";
 
 /// @title Liquidity Book Pair V2 Interface
 /// @author Trader Joe
@@ -200,7 +200,10 @@ interface ILBLegacyPair is ILBLegacyToken {
 
     function getBin(uint24 id) external view returns (uint256 reserveX, uint256 reserveY);
 
-    function pendingFees(address account, uint256[] memory ids)
+    function pendingFees(
+        address account,
+        uint256[] memory ids
+    )
         external
         view
         returns (uint256 amountX, uint256 amountY);
@@ -214,9 +217,15 @@ interface ILBLegacyPair is ILBLegacyToken {
         uint256[] calldata distributionX,
         uint256[] calldata distributionY,
         address to
-    ) external returns (uint256 amountXAddedToPair, uint256 amountYAddedToPair, uint256[] memory liquidityMinted);
+    )
+        external
+        returns (uint256 amountXAddedToPair, uint256 amountYAddedToPair, uint256[] memory liquidityMinted);
 
-    function burn(uint256[] calldata ids, uint256[] calldata amounts, address to)
+    function burn(
+        uint256[] calldata ids,
+        uint256[] calldata amounts,
+        address to
+    )
         external
         returns (uint256 amountX, uint256 amountY);
 
@@ -236,5 +245,6 @@ interface ILBLegacyPair is ILBLegacyToken {
         uint24 activeId,
         uint16 sampleLifetime,
         bytes32 packedFeeParameters
-    ) external;
+    )
+        external;
 }

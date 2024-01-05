@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.10;
 
-import {IJoeRouter01} from "./IJoeRouter01.sol";
+import { IJoeRouter01 } from "./IJoeRouter01.sol";
 
 /// @title Joe V1 Router Interface
 /// @notice Interface to interact with Joe V1 Router
@@ -14,7 +14,9 @@ interface IJoeRouter02 is IJoeRouter01 {
         uint256 amountAVAXMin,
         address to,
         uint256 deadline
-    ) external returns (uint256 amountAVAX);
+    )
+        external
+        returns (uint256 amountAVAX);
 
     function removeLiquidityAVAXWithPermitSupportingFeeOnTransferTokens(
         address token,
@@ -27,7 +29,9 @@ interface IJoeRouter02 is IJoeRouter01 {
         uint8 v,
         bytes32 r,
         bytes32 s
-    ) external returns (uint256 amountAVAX);
+    )
+        external
+        returns (uint256 amountAVAX);
 
     function swapExactTokensForTokensSupportingFeeOnTransferTokens(
         uint256 amountIn,
@@ -35,14 +39,17 @@ interface IJoeRouter02 is IJoeRouter01 {
         address[] calldata path,
         address to,
         uint256 deadline
-    ) external;
+    )
+        external;
 
     function swapExactAVAXForTokensSupportingFeeOnTransferTokens(
         uint256 amountOutMin,
         address[] calldata path,
         address to,
         uint256 deadline
-    ) external payable;
+    )
+        external
+        payable;
 
     function swapExactTokensForAVAXSupportingFeeOnTransferTokens(
         uint256 amountIn,
@@ -50,5 +57,6 @@ interface IJoeRouter02 is IJoeRouter01 {
         address[] calldata path,
         address to,
         uint256 deadline
-    ) external;
+    )
+        external;
 }

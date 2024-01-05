@@ -2,11 +2,11 @@
 
 pragma solidity ^0.8.10;
 
-import {IERC20} from "./IERC20.sol";
+import { IERC20 } from "./IERC20.sol";
 
-import {ILBFactory} from "./ILBFactory.sol";
-import {ILBFlashLoanCallback} from "./ILBFlashLoanCallback.sol";
-import {ILBToken} from "./ILBToken.sol";
+import { ILBFactory } from "./ILBFactory.sol";
+import { ILBFlashLoanCallback } from "./ILBFlashLoanCallback.sol";
+import { ILBToken } from "./ILBToken.sol";
 
 interface ILBPair is ILBToken {
     error LBPair__ZeroBorrowAmount();
@@ -86,7 +86,8 @@ interface ILBPair is ILBToken {
         uint16 protocolShare,
         uint24 maxVolatilityAccumulator,
         uint24 activeId
-    ) external;
+    )
+        external;
 
     function getFactory() external view returns (ILBFactory factory);
 
@@ -138,12 +139,18 @@ interface ILBPair is ILBToken {
 
     function getIdFromPrice(uint256 price) external view returns (uint24 id);
 
-    function getSwapIn(uint128 amountOut, bool swapForY)
+    function getSwapIn(
+        uint128 amountOut,
+        bool swapForY
+    )
         external
         view
         returns (uint128 amountIn, uint128 amountOutLeft, uint128 fee);
 
-    function getSwapOut(uint128 amountIn, bool swapForY)
+    function getSwapOut(
+        uint128 amountIn,
+        bool swapForY
+    )
         external
         view
         returns (uint128 amountInLeft, uint128 amountOut, uint128 fee);
@@ -152,11 +159,20 @@ interface ILBPair is ILBToken {
 
     function flashLoan(ILBFlashLoanCallback receiver, bytes32 amounts, bytes calldata data) external;
 
-    function mint(address to, bytes32[] calldata liquidityConfigs, address refundTo)
+    function mint(
+        address to,
+        bytes32[] calldata liquidityConfigs,
+        address refundTo
+    )
         external
         returns (bytes32 amountsReceived, bytes32 amountsLeft, uint256[] memory liquidityMinted);
 
-    function burn(address from, address to, uint256[] calldata ids, uint256[] calldata amountsToBurn)
+    function burn(
+        address from,
+        address to,
+        uint256[] calldata ids,
+        uint256[] calldata amountsToBurn
+    )
         external
         returns (bytes32[] memory amounts);
 
@@ -172,7 +188,8 @@ interface ILBPair is ILBToken {
         uint24 variableFeeControl,
         uint16 protocolShare,
         uint24 maxVolatilityAccumulator
-    ) external;
+    )
+        external;
 
     function forceDecay() external;
 }

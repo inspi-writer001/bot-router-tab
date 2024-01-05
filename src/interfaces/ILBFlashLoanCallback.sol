@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.10;
 
-import {IERC20} from "./IERC20.sol";
+import { IERC20 } from "./IERC20.sol";
 
 /// @title Liquidity Book Flashloan Callback Interface
 /// @author Trader Joe
@@ -15,5 +15,7 @@ interface ILBFlashLoanCallback {
         bytes32 amounts,
         bytes32 totalFees,
         bytes calldata data
-    ) external returns (bytes32);
+    )
+        external
+        returns (bytes32);
 }

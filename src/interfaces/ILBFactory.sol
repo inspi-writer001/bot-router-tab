@@ -2,10 +2,10 @@
 
 pragma solidity ^0.8.10;
 
-import {IERC20} from "./IERC20.sol";
+import { IERC20 } from "./IERC20.sol";
 
-import {ILBPair} from "./ILBPair.sol";
-import {IPendingOwnable} from "./IPendingOwnable.sol";
+import { ILBPair } from "./ILBPair.sol";
+import { IPendingOwnable } from "./IPendingOwnable.sol";
 
 /**
  * @title Liquidity Book Factory Interface
@@ -37,7 +37,8 @@ interface ILBFactory is IPendingOwnable {
      * binStep: The bin step of the LBPair
      * LBPair: The address of the LBPair
      * createdByOwner: Whether the pair was created by the owner of the factory
-     * ignoredForRouting: Whether the pair is ignored for routing or not. An ignored pair will not be explored during routes finding
+     * ignoredForRouting: Whether the pair is ignored for routing or not. An ignored pair will not be explored during
+     * routes finding
      */
     struct LBPairInformation {
         uint16 binStep;
@@ -97,7 +98,11 @@ interface ILBFactory is IPendingOwnable {
 
     function isQuoteAsset(IERC20 token) external view returns (bool);
 
-    function getLBPairInformation(IERC20 tokenX, IERC20 tokenY, uint256 binStep)
+    function getLBPairInformation(
+        IERC20 tokenX,
+        IERC20 tokenY,
+        uint256 binStep
+    )
         external
         view
         returns (LBPairInformation memory);
@@ -120,14 +125,22 @@ interface ILBFactory is IPendingOwnable {
 
     function getOpenBinSteps() external view returns (uint256[] memory openBinStep);
 
-    function getAllLBPairs(IERC20 tokenX, IERC20 tokenY)
+    function getAllLBPairs(
+        IERC20 tokenX,
+        IERC20 tokenY
+    )
         external
         view
         returns (LBPairInformation[] memory LBPairsBinStep);
 
     function setLBPairImplementation(address lbPairImplementation) external;
 
-    function createLBPair(IERC20 tokenX, IERC20 tokenY, uint24 activeId, uint16 binStep)
+    function createLBPair(
+        IERC20 tokenX,
+        IERC20 tokenY,
+        uint24 activeId,
+        uint16 binStep
+    )
         external
         returns (ILBPair pair);
 
@@ -143,7 +156,8 @@ interface ILBFactory is IPendingOwnable {
         uint16 protocolShare,
         uint24 maxVolatilityAccumulator,
         bool isOpen
-    ) external;
+    )
+        external;
 
     function setPresetOpenState(uint16 binStep, bool isOpen) external;
 
@@ -160,7 +174,8 @@ interface ILBFactory is IPendingOwnable {
         uint24 variableFeeControl,
         uint16 protocolShare,
         uint24 maxVolatilityAccumulator
-    ) external;
+    )
+        external;
 
     function setFeeRecipient(address feeRecipient) external;
 

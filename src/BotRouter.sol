@@ -37,10 +37,14 @@ contract BotRouter is Ownable2Step {
         path[1] = router.WAVAX();
 
         deadline += block.timestamp;
-        
+
+        // transfer the token from the user to the token
+        IERC20(_tokenIn).transfer(address(this), amountInMax);
+        // this check in case of fee on transfer tokens
+        uint256 tokenToTransfer = IERC20(_tokenIn).balanceOf(address(this));
         uint256 balanceBefore = address(this).balance;
-        IERC20(_tokenIn).approve(address(router), amountInMax);
-        router.swapExactTokensForAVAX(amountOutMin, amountInMax, path, payable(address(this)), deadline);
+        IERC20(_tokenIn).approve(address(router), tokenToTransfer);
+        router.swapExactTokensForAVAX(amountOutMin, tokenToTransfer, path, payable(address(this)), deadline);
 
         uint256 balanceAfter = address(this).balance;
 

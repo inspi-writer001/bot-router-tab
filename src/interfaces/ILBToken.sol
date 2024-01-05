@@ -29,7 +29,10 @@ interface ILBToken {
 
     function balanceOf(address account, uint256 id) external view returns (uint256);
 
-    function balanceOfBatch(address[] calldata accounts, uint256[] calldata ids)
+    function balanceOfBatch(
+        address[] calldata accounts,
+        uint256[] calldata ids
+    )
         external
         view
         returns (uint256[] memory);

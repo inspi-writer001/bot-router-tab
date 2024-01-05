@@ -18,7 +18,9 @@ interface IJoeRouter01 {
         uint256 amountBMin,
         address to,
         uint256 deadline
-    ) external returns (uint256 amountA, uint256 amountB, uint256 liquidity);
+    )
+        external
+        returns (uint256 amountA, uint256 amountB, uint256 liquidity);
 
     function addLiquidityAVAX(
         address token,
@@ -27,7 +29,10 @@ interface IJoeRouter01 {
         uint256 amountAVAXMin,
         address to,
         uint256 deadline
-    ) external payable returns (uint256 amountToken, uint256 amountAVAX, uint256 liquidity);
+    )
+        external
+        payable
+        returns (uint256 amountToken, uint256 amountAVAX, uint256 liquidity);
 
     function removeLiquidity(
         address tokenA,
@@ -37,7 +42,9 @@ interface IJoeRouter01 {
         uint256 amountBMin,
         address to,
         uint256 deadline
-    ) external returns (uint256 amountA, uint256 amountB);
+    )
+        external
+        returns (uint256 amountA, uint256 amountB);
 
     function removeLiquidityAVAX(
         address token,
@@ -46,7 +53,9 @@ interface IJoeRouter01 {
         uint256 amountAVAXMin,
         address to,
         uint256 deadline
-    ) external returns (uint256 amountToken, uint256 amountAVAX);
+    )
+        external
+        returns (uint256 amountToken, uint256 amountAVAX);
 
     function removeLiquidityWithPermit(
         address tokenA,
@@ -60,7 +69,9 @@ interface IJoeRouter01 {
         uint8 v,
         bytes32 r,
         bytes32 s
-    ) external returns (uint256 amountA, uint256 amountB);
+    )
+        external
+        returns (uint256 amountA, uint256 amountB);
 
     function removeLiquidityAVAXWithPermit(
         address token,
@@ -73,7 +84,9 @@ interface IJoeRouter01 {
         uint8 v,
         bytes32 r,
         bytes32 s
-    ) external returns (uint256 amountToken, uint256 amountAVAX);
+    )
+        external
+        returns (uint256 amountToken, uint256 amountAVAX);
 
     function swapExactTokensForTokens(
         uint256 amountIn,
@@ -81,7 +94,9 @@ interface IJoeRouter01 {
         address[] calldata path,
         address to,
         uint256 deadline
-    ) external returns (uint256[] memory amounts);
+    )
+        external
+        returns (uint256[] memory amounts);
 
     function swapTokensForExactTokens(
         uint256 amountOut,
@@ -89,9 +104,16 @@ interface IJoeRouter01 {
         address[] calldata path,
         address to,
         uint256 deadline
-    ) external returns (uint256[] memory amounts);
+    )
+        external
+        returns (uint256[] memory amounts);
 
-    function swapExactAVAXForTokens(uint256 amountOutMin, address[] calldata path, address to, uint256 deadline)
+    function swapExactAVAXForTokens(
+        uint256 amountOutMin,
+        address[] calldata path,
+        address to,
+        uint256 deadline
+    )
         external
         payable
         returns (uint256[] memory amounts);
@@ -102,7 +124,9 @@ interface IJoeRouter01 {
         address[] calldata path,
         address to,
         uint256 deadline
-    ) external returns (uint256[] memory amounts);
+    )
+        external
+        returns (uint256[] memory amounts);
 
     function swapExactTokensForAVAX(
         uint256 amountIn,
@@ -110,31 +134,52 @@ interface IJoeRouter01 {
         address[] calldata path,
         address to,
         uint256 deadline
-    ) external returns (uint256[] memory amounts);
+    )
+        external
+        returns (uint256[] memory amounts);
 
-    function swapAVAXForExactTokens(uint256 amountOut, address[] calldata path, address to, uint256 deadline)
+    function swapAVAXForExactTokens(
+        uint256 amountOut,
+        address[] calldata path,
+        address to,
+        uint256 deadline
+    )
         external
         payable
         returns (uint256[] memory amounts);
 
     function quote(uint256 amountA, uint256 reserveA, uint256 reserveB) external pure returns (uint256 amountB);
 
-    function getAmountOut(uint256 amountIn, uint256 reserveIn, uint256 reserveOut)
+    function getAmountOut(
+        uint256 amountIn,
+        uint256 reserveIn,
+        uint256 reserveOut
+    )
         external
         pure
         returns (uint256 amountOut);
 
-    function getAmountIn(uint256 amountOut, uint256 reserveIn, uint256 reserveOut)
+    function getAmountIn(
+        uint256 amountOut,
+        uint256 reserveIn,
+        uint256 reserveOut
+    )
         external
         pure
         returns (uint256 amountIn);
 
-    function getAmountsOut(uint256 amountIn, address[] calldata path)
+    function getAmountsOut(
+        uint256 amountIn,
+        address[] calldata path
+    )
         external
         view
         returns (uint256[] memory amounts);
 
-    function getAmountsIn(uint256 amountOut, address[] calldata path)
+    function getAmountsIn(
+        uint256 amountOut,
+        address[] calldata path
+    )
         external
         view
         returns (uint256[] memory amounts);

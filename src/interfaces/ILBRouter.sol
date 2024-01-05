@@ -2,15 +2,15 @@
 
 pragma solidity ^0.8.10;
 
-import {IERC20} from "./IERC20.sol";
+import { IERC20 } from "./IERC20.sol";
 
-import {IJoeFactory} from "./IJoeFactory.sol";
-import {ILBFactory} from "./ILBFactory.sol";
-import {ILBLegacyFactory} from "./ILBLegacyFactory.sol";
-import {ILBLegacyRouter} from "./ILBLegacyRouter.sol";
-import {ILBPair} from "./ILBPair.sol";
-import {ILBToken} from "./ILBToken.sol";
-import {IWNATIVE} from "./IWNATIVE.sol";
+import { IJoeFactory } from "./IJoeFactory.sol";
+import { ILBFactory } from "./ILBFactory.sol";
+import { ILBLegacyFactory } from "./ILBLegacyFactory.sol";
+import { ILBLegacyRouter } from "./ILBLegacyRouter.sol";
+import { ILBPair } from "./ILBPair.sol";
+import { ILBToken } from "./ILBToken.sol";
+import { IWNATIVE } from "./IWNATIVE.sol";
 
 /**
  * @title Liquidity Book Router Interface
@@ -117,17 +117,30 @@ interface ILBRouter {
 
     function getPriceFromId(ILBPair LBPair, uint24 id) external view returns (uint256);
 
-    function getSwapIn(ILBPair LBPair, uint128 amountOut, bool swapForY)
+    function getSwapIn(
+        ILBPair LBPair,
+        uint128 amountOut,
+        bool swapForY
+    )
         external
         view
         returns (uint128 amountIn, uint128 amountOutLeft, uint128 fee);
 
-    function getSwapOut(ILBPair LBPair, uint128 amountIn, bool swapForY)
+    function getSwapOut(
+        ILBPair LBPair,
+        uint128 amountIn,
+        bool swapForY
+    )
         external
         view
         returns (uint128 amountInLeft, uint128 amountOut, uint128 fee);
 
-    function createLBPair(IERC20 tokenX, IERC20 tokenY, uint24 activeId, uint16 binStep)
+    function createLBPair(
+        IERC20 tokenX,
+        IERC20 tokenY,
+        uint24 activeId,
+        uint16 binStep
+    )
         external
         returns (ILBPair pair);
 
@@ -164,7 +177,9 @@ interface ILBRouter {
         uint256[] memory amounts,
         address to,
         uint256 deadline
-    ) external returns (uint256 amountX, uint256 amountY);
+    )
+        external
+        returns (uint256 amountX, uint256 amountY);
 
     function removeLiquidityNATIVE(
         IERC20 token,
@@ -175,7 +190,9 @@ interface ILBRouter {
         uint256[] memory amounts,
         address payable to,
         uint256 deadline
-    ) external returns (uint256 amountToken, uint256 amountNATIVE);
+    )
+        external
+        returns (uint256 amountToken, uint256 amountNATIVE);
 
     function swapExactTokensForTokens(
         uint256 amountIn,
@@ -183,7 +200,9 @@ interface ILBRouter {
         Path memory path,
         address to,
         uint256 deadline
-    ) external returns (uint256 amountOut);
+    )
+        external
+        returns (uint256 amountOut);
 
     function swapExactTokensForNATIVE(
         uint256 amountIn,
@@ -191,9 +210,16 @@ interface ILBRouter {
         Path memory path,
         address payable to,
         uint256 deadline
-    ) external returns (uint256 amountOut);
+    )
+        external
+        returns (uint256 amountOut);
 
-    function swapExactNATIVEForTokens(uint256 amountOutMin, Path memory path, address to, uint256 deadline)
+    function swapExactNATIVEForTokens(
+        uint256 amountOutMin,
+        Path memory path,
+        address to,
+        uint256 deadline
+    )
         external
         payable
         returns (uint256 amountOut);
@@ -204,7 +230,9 @@ interface ILBRouter {
         Path memory path,
         address to,
         uint256 deadline
-    ) external returns (uint256[] memory amountsIn);
+    )
+        external
+        returns (uint256[] memory amountsIn);
 
     function swapTokensForExactNATIVE(
         uint256 amountOut,
@@ -212,9 +240,16 @@ interface ILBRouter {
         Path memory path,
         address payable to,
         uint256 deadline
-    ) external returns (uint256[] memory amountsIn);
+    )
+        external
+        returns (uint256[] memory amountsIn);
 
-    function swapNATIVEForExactTokens(uint256 amountOut, Path memory path, address to, uint256 deadline)
+    function swapNATIVEForExactTokens(
+        uint256 amountOut,
+        Path memory path,
+        address to,
+        uint256 deadline
+    )
         external
         payable
         returns (uint256[] memory amountsIn);
@@ -225,7 +260,9 @@ interface ILBRouter {
         Path memory path,
         address to,
         uint256 deadline
-    ) external returns (uint256 amountOut);
+    )
+        external
+        returns (uint256 amountOut);
 
     function swapExactTokensForNATIVESupportingFeeOnTransferTokens(
         uint256 amountIn,
@@ -233,17 +270,27 @@ interface ILBRouter {
         Path memory path,
         address payable to,
         uint256 deadline
-    ) external returns (uint256 amountOut);
+    )
+        external
+        returns (uint256 amountOut);
 
     function swapExactNATIVEForTokensSupportingFeeOnTransferTokens(
         uint256 amountOutMin,
         Path memory path,
         address to,
         uint256 deadline
-    ) external payable returns (uint256 amountOut);
+    )
+        external
+        payable
+        returns (uint256 amountOut);
 
     function sweep(IERC20 token, address to, uint256 amount) external;
 
-    function sweepLBToken(ILBToken _lbToken, address _to, uint256[] calldata _ids, uint256[] calldata _amounts)
+    function sweepLBToken(
+        ILBToken _lbToken,
+        address _to,
+        uint256[] calldata _ids,
+        uint256[] calldata _amounts
+    )
         external;
 }
