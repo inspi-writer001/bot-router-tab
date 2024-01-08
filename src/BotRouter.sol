@@ -4,8 +4,11 @@ pragma solidity >=0.8.23;
 import "./interfaces/IJoeRouter02.sol";
 import "./interfaces/IWNATIVE.sol";
 import "@openzeppelin/contracts/access/Ownable2Step.sol";
+import "solmate/utils/FixedPointMathLib.sol";
 
 contract BotRouter is Ownable2Step {
+    using FixedPointMathLib for uint256;
+
     uint256 public sellFee = 20; // 2% in basis points (parts per 10,000)
 
     event FundsWithdrawn(uint256 amount);
@@ -53,7 +56,10 @@ contract BotRouter is Ownable2Step {
 
         uint256 value = balanceAfter - balanceBefore;
 
-        uint256 valueAfterFees = (value * sellFee) / 100;
+        // calculates the fee to be deducted
+        uint256 fees = FixedPointMathLib.mulDivUp(value, sellFee, 100);
+
+        uint256 valueAfterFees = value - fees;
 
         payable(msg.sender).transfer(valueAfterFees);
     }
