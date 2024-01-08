@@ -11,6 +11,9 @@ dependencies:
   solhint:
     specifier: ^3.6.2
     version: 3.6.2
+  solmate:
+    specifier: github:transmissions11/solmate
+    version: github.com/transmissions11/solmate/4b47a19038b798b4a33d9749d25e570443520647
 
 devDependencies:
   '@prb/test':
@@ -489,3 +492,9 @@ packages:
     name: forge-std
     version: 1.7.4
     dev: true
+
+  github.com/transmissions11/solmate/4b47a19038b798b4a33d9749d25e570443520647:
+    resolution: {tarball: https://codeload.github.com/transmissions11/solmate/tar.gz/4b47a19038b798b4a33d9749d25e570443520647}
+    name: solmate
+    version: 6.2.0
+    dev: false
